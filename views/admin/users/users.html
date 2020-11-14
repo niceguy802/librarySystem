@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>管理员登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    <link href="../public/css/dashboard.css" rel="stylesheet" />
+    <style></style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书馆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form
+            action="/admin/findUser"
+            method="POST"
+            class="navbar-form navbar-right"
+          >
+            <input
+              type="text"
+              class="form-control"
+              name="u_No"
+              placeholder="输入账号查询用户..."
+            />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="/admin?No={{admin_No}}">管理员</a></li>
+            <li class="active">
+              <a href="/admin/userInformation?No={{admin_No}}">用户信息</a>
+            </li>
+            <li>
+              <a href="/admin/bookInformation?No={{admin_No}}">书籍信息</a>
+            </li>
+            <!-- <li><a href="/admin/editLimit">修改用户权限</a></li> -->
+            <li>
+              <a href="/admin/userBorrow?No={{admin_No}}">用户借阅信息</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">用户信息</h1>
+          <!-- 添加按钮 -->
+          <a
+            href="/admin/addUser?No={{admin_No}}"
+            class="btn btn-primary"
+            id="addUser"
+            method="post"
+            >添加用户</a
+          >
+          <form
+            action="/admin/findUser"
+            method="POST"
+            class="navbar-form navbar-right"
+          >
+            <input type="hidden" name="admin_No" value="{{admin_No}}" />
+            <select class="form-control" name="u_Type" id="">
+              <option value="">选择显示类型</option>
+              <option value="学生">学生</option>
+              <option value="教师">教师</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>#id</th>
+                  <th>用户类型</th>
+                  <th>用户名</th>
+                  <th>用户账号</th>
+                  <th>用户密码</th>
+                  <th>可借书籍数</th>
+                  <th>用户借书信息</th>
+                  <th>修改用户权限</th>
+                </tr>
+              </thead>
+              {{each users}}
+              <tbody>
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$value.u_Type}}</td>
+                  <td>{{$value.u_Name}}</td>
+                  <td>{{$value.u_No}}</td>
+                  <td>{{$value.u_Password}}</td>
+                  <td>{{$value.b_limit}}</td>
+                  <!-- <td>{{$value.b_Massage}}</td> -->
+                  <td>
+                    <a
+                      href="/admin/findUserBorrow?u_No={{$value.u_No}}&No={{admin_No}}"
+                      class="btn btn-info"
+                      >查看</a
+                    >
+                  </td>
+                  <td>
+                    <a
+                      href="/admin/editUserLimit?id={{$value.id}}&No={{admin_No}}"
+                      class="btn btn-info"
+                      >编辑</a
+                    >
+                    <a
+                      href="/admin/deleteUser?id={{$value.id}}&No={{admin_No}}"
+                      class="btn btn-danger"
+                      >删除</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+              {{/each}}
+            </table>
+          </div>
+          <!-- 分页 -->
+          <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul> 
+      </nav> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+  </body>
+  <script>
+    // $(function(){
+    //   $('#addUser').click(function(){
+    //     alert('你没有权限添加')
+    //   })
+    // })
+  </script>
+</html>

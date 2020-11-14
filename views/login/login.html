@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>登录界面</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" type="text/css" href="/public/css/login.css" />
+</head>
+
+<body>
+  <form name="form1" action="/login" method="POST">
+    <h1>图书馆管理系统</h1>
+    <input class=input_1 id="u_Name" size="15" name="u_No" placeholder="用户名"><br />
+    <input class=input_1 id="u_Password" type="password" size="15" name="u_Password" placeholder="密码"><br />
+
+    <span class="radio_box">
+      <input type="radio" id="radio_1" name="rad" value="1" checked>
+      <label for="radio_1" name="radFlag"></label>
+      普通用户
+    </span>
+    <span class="radio_box">
+      <input type="radio" id="radio_2" name="rad" value="2">
+      <label for="radio_2" name="radFlag"></label>
+      管理员
+    </span>
+    <span class="radio_box">
+      <input type="radio" id="radio_3" name="rad" value="3">
+      <label for="radio_3" name="radFlag"></label>
+      超级管理员
+    </span><br />
+    <button class="input_3" type="submit">登录</button>
+    <input class="input_3" type="button" onclick=document.form1.reset() value="重置" />
+  </form>
+</body>
+<script src="/091020/librarySystem/public/js/rad.js"></script>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>图书馆管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/dashboard.css" rel="stylesheet" />
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书馆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search..." />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="/admins?No={{super_No}}">管理员管理界面</a></li>
+            <li>
+              <a href="/superManager/viewLog?No={{super_No}}">日志管理</a>
+            </li>
+            <li class="active">
+              <a href="/superManager/holiday?No={{super_No}}">假期管理</a>
+            </li>
+            <li><a href="/admin/userInformation">用户信息</a></li>
+            <li><a href="/admin/bookInformation">书籍信息</a></li>
+            <li><a href="/admin/userBorrow">用户借阅信息</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">假期管理</h1>
+
+          <a
+            href="#"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+            >设置假期</a
+          >
+
+          <!-- 设置假期弹框 -->
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-backdrop="static"
+            data-keyboard="false"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">设置假期</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- 设置假期表单 -->
+                  <form action="/superManager/holiday" method="POST">
+                    <input
+                      type="hidden"
+                      name="super_No"
+                      id=""
+                      value="{{super_No}}"
+                    />
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">假期名称</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="h_Name"
+                        id="h_Name"
+                        placeholder="假期名称"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">开始时间</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="h_Start"
+                        id="h_Start"
+                        placeholder="开始时间"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">结束时间</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="h_End"
+                        id="h_End"
+                        placeholder="结束时间"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="pull-left" for="exampleInputEmail1"
+                        >总天数 &nbsp;&nbsp;</label
+                      >
+                      <input
+                        style="width: 10%"
+                        type="number"
+                        class="form-control pull-left"
+                        aria-describedby="sizing-addon3"
+                        name="h_Day"
+                        id="h_Day"
+                        value=""
+                      />&nbsp;&nbsp;天
+                    </div>
+                    <br />
+                    <button
+                      type="submit"
+                      class="btn btn-primary center-block"
+                      style="margin-right: 0"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>假期名称</th>
+                  <th>开始时间</th>
+                  <th>结束时间</th>
+                  <th>天数</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{each holidays}}
+                <tr>
+                  <td>{{$value.h_Name}}</td>
+                  <td>{{$value.h_Start}}</td>
+                  <td>{{$value.h_End}}</td>
+                  <td>{{$value.h_Day}}天</td>
+                  <td>
+                    <a href="/holiday/edit?id={{$value.id}}&No={{super_No}}"
+                      >编辑</a
+                    >
+                    <a href="/holiday/delete?id={{$value.id}}&No={{super_No}}"
+                      >删除</a
+                    >
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+
+          <nav
+            aria-label="Page navigation"
+            class="center-block"
+            style="width: 240px"
+          >
+            <ul class="pagination">
+              <li id="pageUp">
+                <a
+                  href="/superManager/holiday?page={{page-1}}"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <input id="pageNum" type="hidden" value="{{pages}}" />
+            </ul>
+
+            <ul class="pagination" id="pageList"></ul>
+
+            <ul class="pagination">
+              <li id="pageNext">
+                <a
+                  href="/superManager/holiday?page={{page+1}}"
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/js/holiday.js"></script>
+    <script src="/public/js/holidayPage.js"></script>
+  </body>
+</html>

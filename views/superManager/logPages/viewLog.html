@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>图书馆管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/dashboard.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书馆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form
+            action="/superManager/findLog"
+            method="post"
+            class="navbar-form navbar-right"
+          >
+            <input
+              type="text"
+              class="form-control"
+              name="a_Name"
+              placeholder="根据管理员姓名搜索"
+            />
+            <button type="submit" class="btn btn-primary">搜索</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="/admins?No={{super_No}}">管理员管理界面</a></li>
+            <li class="active">
+              <a href="/superManager/viewLog?No={{super_No}}">日志管理</a>
+            </li>
+            <li>
+              <a href="/superManager/holiday?No={{super_No}}">假期管理</a>
+            </li>
+            <li><a href="/admin/userInformation">用户信息</a></li>
+            <li><a href="/admin/bookInformation">书籍信息</a></li>
+            <li><a href="/admin/userBorrow">用户借阅信息</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">日志管理</h1>
+
+          <div class="flex-row-reverse">
+            <a
+              href="/superManager/newLog?No={{super_No}}"
+              class="btn btn-primary"
+              >添加日志</a
+            >
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>管理员账号</th>
+                  <th>管理员姓名</th>
+                  <th>用户账号</th>
+                  <th>图书编号</th>
+                  <th>操作内容</th>
+                  <th>操作时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{each logs}}
+                <tr>
+                  <td>{{$value.a_No}}</td>
+                  <td>{{$value.a_Name}}</td>
+                  <td>{{$value.u_No}}</td>
+                  <td>{{$value.b_No}}</td>
+                  <td>{{$value.oper_Content}}</td>
+                  <td>{{$value.oper_Time}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+
+          <nav
+            aria-label="Page navigation"
+            class="center-block"
+            style="width: 240px"
+          >
+            <ul class="pagination">
+              <li id="pageUp">
+                <a
+                  href="/superManager/viewLog?page={{page-1}}&super_No={{super_No}}"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <input id="pageNum" type="hidden" value="{{pages}}" />
+            </ul>
+
+            <ul class="pagination" id="pageList"></ul>
+
+            <ul class="pagination">
+              <li id="pageNext">
+                <a
+                  href="/superManager/viewLog?page={{page+1}}&super_No={{super_No}}"
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/js/viewLog.js"></script>
+  </body>
+</html>

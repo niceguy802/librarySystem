@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>管理员登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="/public/css/dashboard.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书馆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">登录</a></li>
+            <li><a href="#">设置</a></li>
+            <li><a href="#">帮助</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="查询用户/书籍..."
+            />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a href="/admin?No={{admin_No}}"
+                >管理员<span class="sr-only">(current)</span></a
+              >
+            </li>
+            <!-- <li><a href="#">添加用户</a></li>
+                  <li><a href="#">添加书籍</a></li> -->
+            <li>
+              <a href="/admin/userInformation?No={{admin_No}}">用户信息</a>
+            </li>
+            <li class="active">
+              <a href="/admin/bookInformation?No={{admin_No}}">书籍信息</a>
+            </li>
+            <!-- <li><a href="#">修改用户权限</a></li> -->
+            <li>
+              <a href="/admin/userBorrow?No={{admin_No}}">用户借阅信息</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">修改书籍</h1>
+
+          <form action="/admin/bookInformation/editBook" method="POST">
+            <input type="hidden" name="id" value="{{book.id}}" />
+            <input type="hidden" name="admin_No" value="{{admin_No}}" />
+            <div class="form-group">
+              <label for="">书名</label>
+              <input
+                type="text"
+                class="form-control"
+                name="b_Name"
+                placeholder="书名"
+                value="{{book.b_Name}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">作者</label>
+              <input
+                type="text"
+                class="form-control"
+                name="b_Author"
+                placeholder="作者"
+                value="{{book.b_Author}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">类型</label>
+              <input
+                type="text"
+                class="form-control"
+                name="b_Type"
+                placeholder="类型"
+                value="{{book.b_Type}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">出版社</label>
+              <input
+                type="text"
+                class="form-control"
+                name="b_pulic"
+                placeholder="出版社"
+                value="{{book.b_pulic}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">价格</label>
+              <input
+                type="text"
+                class="form-control"
+                name="b_Price"
+                placeholder="价格"
+                value="{{book.b_Price}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">编号</label>
+              <input
+                type="number"
+                class="form-control"
+                name="b_No"
+                placeholder="编号"
+                value="{{book.b_No}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="">数量</label>
+              <input
+                type="number"
+                name="b_Num"
+                class="form-control"
+                value="{{book.b_Num}}"
+              />
+            </div>
+            <!--  <div class="form-group">
+               <label for="">可借阅数量</label>
+               <input type="number" name="b_Rest" class="form-control" value="{{book.b_Rest}}">
+            </div> -->
+            <button type="submit" class="btn btn-primary">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script></script>
+</html>

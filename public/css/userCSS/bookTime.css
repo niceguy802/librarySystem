@@ -1,0 +1,27 @@
+.userName{
+    font-size: 20px;
+}
+.Books{
+    position: relative;
+    margin-top: 10px;
+}
+.Books:hover{
+    box-shadow: 0px 0px 5px gray;
+}
+
+.borrowingBooks{
+    color:red;
+    width: 100px;
+    height: 38px;
+    border: 3px solid red;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 33px;
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 90px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}

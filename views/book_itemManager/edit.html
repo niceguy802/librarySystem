@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>1015</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/public/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+ -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>#hui a:hover{ color: red }</style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">登录</a></li>
+            <li><a href="#">用户</a></li>
+            <li><a href="#">管理员</a></li>
+            <li><a href="#">超级管理员</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">欢迎您进入图书馆<span class="sr-only">(current)</span></a></li>
+            <li id="hui">
+              <a href="/book_items">所有图书</a>
+            </li>
+            <li id="hui">
+              <a href="/book_items/cha">查找图书</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">修改图书信息</h1>
+          <form action="/book_items/edit" method="post">
+            <input type="hidden" name="id" value={{book_item.id}}>
+            <div class="form-group">
+              <label for="">图书名称</label>
+              <input type="text" class="form-control" id="" name="b_Name" value="{{book_item.b_Name}}">
+            </div>
+            <div class="form-group">
+              <label for="">图书编号</label>
+              <input type="number" class="form-control" id="" name="b_No"  value="{{book_item.b_No}}">
+            </div>
+            <div class="form-group">
+              <label>图书作者</label>
+              <input type="text" name="b_Author" class="form-control" value="{{book_item.b_Author}}">
+            </div>
+            <div class="form-group">
+              <label>图书类型</label>
+              <input type="text" name="b_Type" class="form-control" value="{{book_item.b_Type}}">
+            </div>
+            <div class="form-group">
+              <label>出版社</label>
+              <input type="text" name="b_pulic" class="form-control" value="{{book_item.b_pulic}}">
+            </div>
+            <div class="form-group">
+              <label>图书价格</label>
+              <input type="number" name="b_Price" class="form-control" value="{{book_item.b_Price}}">
+            </div>
+            <button type="submit" class="btn-primary">Submit</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>   
+  </body>
+</html>

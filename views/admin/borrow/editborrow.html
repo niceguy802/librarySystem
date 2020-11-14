@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>管理员登录</title>
+
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    <link href="../public/css/dashboard.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书馆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="查询用户/书籍..."
+            />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="/admin?No={{admin_No}}">管理员</a></li>
+            <li>
+              <a href="/admin/userInformation?No={{admin_No}}">用户信息</a>
+            </li>
+            <li>
+              <a href="/admin/bookInformation?No={{admin_No}}">书籍信息</a>
+            </li>
+            <li class="active">
+              <a href="/admin/userBorrow?No={{admin_No}}">用户借阅信息</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">修改借阅信息</h1>
+
+          <form
+            action="/admin/editUserBorrow"
+            method="POST"
+            class="form-horizontal"
+          >
+            <!--用户类型-->
+            <input type="hidden" name="id" value="{{borrows.id}}" />
+            <input type="hidden" name="admin_No" value="{{admin_No}}" />
+
+            <!-- 账号 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >账号：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="u_No"
+                  value="{{borrows.u_No}}"
+                  placeholder="账号"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 姓名 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >用户名字：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="u_Name"
+                  id=""
+                  value="{{borrows.u_Name}}"
+                  placeholder="姓名"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 图书编号 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >图书编号：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="b_No"
+                  id=""
+                  value="{{borrows.b_No}}"
+                  placeholder="图书编号"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 书名 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >书名：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="b_Name"
+                  id=""
+                  value="{{borrows.b_Name}}"
+                  placeholder="书名"
+                  required
+                />
+              </div>
+            </div>
+            <!-- 借阅时间 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >借阅时间：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bor_Time"
+                  id=""
+                  value="{{borrows.bor_Time}}"
+                  placeholder="借阅时间"
+                  required
+                />
+              </div>
+            </div>
+            <!-- 归还时间 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >归还时间：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ret_Time"
+                  id=""
+                  value="{{borrows.ret_Time}}"
+                  placeholder="归还时间"
+                  required
+                />
+              </div>
+            </div>
+            <!-- 是否归还 -->
+            <div class="form-group">
+              <label for="exampleInputPassword1" class="col-sm-1 control-label"
+                >是否归还：</label
+              >
+              <div class="col-sm-10">
+                <label class="radio-inline">
+                  <input
+                    type="text"
+                    id="borrowType"
+                    value="{{borrows.already}}"
+                    hidden
+                  />
+                  <input type="radio" name="already" id="radio5" value="是" />是
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="already" id="radio6" value="否" />否
+                </label>
+              </div>
+            </div>
+
+            <!-- 状态 -->
+            <div class="form-group">
+              <label for="exampleInputPassword1" class="col-sm-1 control-label"
+                >状态：</label
+              >
+              <div class="col-sm-10">
+                <label class="radio-inline">
+                  <input
+                    type="text"
+                    id="userLimit"
+                    value="{{borrows.status}}"
+                    hidden
+                  />
+                  <input
+                    type="radio"
+                    name="status"
+                    id="radio3"
+                    value="逾期"
+                  />逾期
+                </label>
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    name="status"
+                    id="radio4"
+                    value="未逾期"
+                  />未逾期
+                </label>
+              </div>
+            </div>
+
+            <!-- 逾期费用 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >逾期费用：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="money"
+                  id=""
+                  value="{{borrows.money}}"
+                  placeholder="逾期费用"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+  </body>
+  <script>
+    // $(document).ready(function () {
+
+    //     var checked = [];
+
+    //     $("#radio3").click(function () {
+
+    //       $('input:radio:checked').each(function () {
+
+    //         checked.push($(this).val());
+
+    //       });
+
+    //       alert(checked);
+
+    //     });
+
+    //   });
+
+    // 判断用户类型
+    $(function () {
+      if ($("#borrowType").val() == "是") {
+        $("#radio5").attr("checked", "checked");
+      } else if ($("#borrowType").val() == "否") {
+        $("#radio6").attr("checked", "checked");
+      }
+    });
+    // 判断用户借书状态
+    $(function () {
+      if ($("#userLimit").val() == "逾期") {
+        $("#radio3").attr("checked", "checked");
+      } else if ($("#userLimit").val() == "未逾期") {
+        $("#radio4").attr("checked", "checked");
+      }
+    });
+
+    $(function () {
+      // 密码
+      var password = /^[A-Za-z0-9]{6,20}$/;
+      $("#passwordnNo").blur(function () {
+        var passwordnNo = $("#passwordnNo").val();
+        console.log(passwordnNo);
+        if ($(this).val() == "") {
+          alert("密码不能为空,请输入不少于6位的包含数字或大小写字母密码");
+        } else if (!password.test($(this).val())) {
+          alert("密码不规范");
+        }
+      });
+    });
+  </script>
+</html>

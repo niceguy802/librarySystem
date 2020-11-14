@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>添加借阅</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="/public/css/dashboard.css" rel="stylesheet" />
+
+    <style>
+      #hui a:hover {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">图书管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">登录</a></li>
+            <li><a href="#">用户</a></li>
+            <li><a href="#">管理员</a></li>
+            <li><a href="#">超级管理员</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search..." />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a href="users/books?No={{userNo}}">所有书籍</a>
+            </li>
+            <li class="active">
+              <a href="/borrows?No={{userNo}}">我的借阅</a>
+            </li>
+            <li>
+              <a href="/users?No={{userNo}}">返回个人信息</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">添加借阅</h1>
+
+          <form action="/borrows/new" method="POST" class="form-horizontal">
+            <!-- 账号 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >账号：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="u_No"
+                  value="{{userNo}}"
+                  placeholder="账号"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 姓名 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >用户名字：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="u_Name"
+                  id=""
+                  placeholder="姓名"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 图书编号 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >图书编号：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="b_No"
+                  id=""
+                  placeholder="图书编号"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 书名 -->
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >书名：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="b_Name"
+                  id=""
+                  placeholder="书名"
+                  required
+                />
+              </div>
+            </div>
+            <!-- 借阅时间 -->
+            <div class="form-group" hidden>
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >借阅时间：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bor_Time"
+                  id="time"
+                  placeholder="借阅时间"
+                  required
+                />
+              </div>
+            </div>
+            <!-- 还书时间 -->
+            <div class="form-group" hidden>
+              <label for="exampleInputEmail1" class="col-sm-1 control-label"
+                >还书时间：</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ret_Time"
+                  id="ret_Time"
+                  placeholder="还书时间"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function time() {
+    var time = new Date();
+    return time;
+  }
+  document.getElementById("time").value = time();
+
+  function ret_Time() {
+    var time = new Date();
+    var ret_time = time.setDate(time.getDate() + 30);
+    return ret_time;
+  }
+  document.getElementById("ret_Time").value = ret_Time();
+</script>
